@@ -21,15 +21,27 @@ Whisper is a simple PHP web application for sharing secrets securely, one time o
 Below are screenshots of the main pages:
 
 ### 1. Set a Secret
-
+<p align="center">
+   
+ ![image](https://raw.githubusercontent.com/Geetansh01/whisper-prj/main/images/setSecret.png)
+ 
+</p>
 
 ### 2. View the Secret URL
 
-
+<p align="center">
+ 
+   ![image](https://raw.githubusercontent.com/Geetansh01/whisper-prj/main/images/getURL.png)
+   
 
 ### 3. View the Secret
 
-
+</p>
+<p align="center">
+   
+ ![image](https://raw.githubusercontent.com/Geetansh01/whisper-prj/main/images/seeSecret.png)
+ 
+</p>
 
 ## Getting Started
 
