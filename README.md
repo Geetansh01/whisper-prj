@@ -16,6 +16,21 @@ Whisper is a simple PHP web application for sharing secrets securely, one time o
 3. The recipient visits the URL to view the secret.
 4. The secret is displayed once and then deleted from the database.
 
+## Screenshots
+
+Below are screenshots of the main pages:
+
+### 1. Set a Secret
+
+
+### 2. View the Secret URL
+
+
+
+### 3. View the Secret
+
+
+
 ## Getting Started
 
 ### Prerequisites
