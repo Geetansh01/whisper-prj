@@ -1,30 +1,29 @@
 <?php
+// Initialize variable for the inserted secret message ID
 $secret_msg_id = NULL;
+
 if(isset($_POST['secret_msg'])){
-    $host = "localhost"; // MySQL server
-    $username = "root"; // MySQL username
-    $password = "root"; // MySQL password
+    $host = "localhost";
+    $username = "root";
+    $password = "root";
     $dbname = "whisper"; 
 
     try{
-        // Create a connection
+        // Establish MySQL connection
         $conn = mysqli_connect($host, $username, $password, $dbname);
     
         if(!$conn){
             die("Connection failed. Please Try Later");
         }
-        // else{
-        //     echo "Connected successfully to MySQL DB";
-        // }
     
         $secret_msg = $_POST['secret_msg'];
     
         $sql = "INSERT INTO secret (secret) VALUES ('$secret_msg');"; // ⚠ SQL Injection Vulnerability: Not sanitizing the input to MySQL
     
         try{
-    
             $result = mysqli_query($conn, $sql);
             if($result){
+                // Get the ID of the newly inserted secret
                 $secret_msg_id = mysqli_insert_id($conn);
             } else {
                 echo "Error inserting data. Please Try Later";
@@ -38,7 +37,6 @@ if(isset($_POST['secret_msg'])){
         echo "Error! Please try later!";
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -101,6 +99,7 @@ if(isset($_POST['secret_msg'])){
         <h2>Share your secret link</h2>
         <p>
             <?php
+                // Show the one-time secret link if available
                 if ($secret_msg_id !== NULL) {
                     $url = "http://localhost:8000/viewSecret.php?secret_msg_id=$secret_msg_id";
                     echo "<span class='share-link' id='secretUrl'>$url</span>";
@@ -111,6 +110,7 @@ if(isset($_POST['secret_msg'])){
         <div class="footer">Whisper &copy; <?php echo date('Y'); ?></div>
     </div>
     <script>
+        // Copy the secret link to clipboard
         function copyUrl() {
             var url = document.getElementById('secretUrl').innerText;
             navigator.clipboard.writeText(url).then(function() {

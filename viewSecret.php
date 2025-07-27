@@ -1,17 +1,20 @@
 <?php
+// Initialize variables for secret and user messages
 $secret = NULL;
 $message = NULL;
 $messageClass = "info";
+
+// Check if a valid secret message ID is provided via GET
 if(isset($_GET['secret_msg_id']) && is_numeric($_GET['secret_msg_id'])){
-    $host = "localhost"; // MySQL server
-    $username = "root"; // MySQL username
-    $password = "root"; // MySQL password
+    $host = "localhost";
+    $username = "root";
+    $password = "root";
     $dbname = "whisper"; 
 
     $secret_msg_id = $_GET['secret_msg_id'];
 
     try{
-        // Create a connection
+        // Establish MySQL connection
         $conn = mysqli_connect($host, $username, $password, $dbname);
 
         if(!$conn){
@@ -29,6 +32,7 @@ if(isset($_GET['secret_msg_id']) && is_numeric($_GET['secret_msg_id'])){
                     $messageClass = "error";
                 }
                 elseif(mysqli_num_rows($result) != 0){
+                    // Fetch the secret and delete it (one-time view)
                     $secret = mysqli_fetch_row($result)[0];
                     $sql = "DELETE FROM secret WHERE id = $secret_msg_id";
                     $result2 = mysqli_query($conn, $sql);
@@ -111,8 +115,8 @@ if(isset($_GET['secret_msg_id']) && is_numeric($_GET['secret_msg_id'])){
 <body>
     <div class="container">
         <?php
+            // Display appropriate message or the secret
             if($secret === NULL){
-                // Always show a message, either default or from PHP logic
                 if($message !== NULL){
                     echo '<div class="' . $messageClass . '">' . htmlspecialchars($message) . '</div>';
                 } else {
@@ -123,7 +127,8 @@ if(isset($_GET['secret_msg_id']) && is_numeric($_GET['secret_msg_id'])){
                 if($message !== NULL){
                     echo '<div class="' . $messageClass . '">' . htmlspecialchars($message) . '</div>';
                 }
-                echo '<div class="secret">'.htmlspecialchars($secret).'</div>'; // XSS safe
+                // Output the secret (HTML-escaped for XSS protection)
+                echo '<div class="secret">'.htmlspecialchars($secret).'</div>';
             }
         ?>
         <div class="footer">Whisper &copy; <?php echo date('Y'); ?></div>
