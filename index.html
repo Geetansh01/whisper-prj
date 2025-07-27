@@ -4,11 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whisper</title>
+    <style>
+        body {
+            background: linear-gradient(120deg, #f7971e 0%, #ffd200 100%);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: rgba(255,255,255,0.92);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.17);
+            padding: 2.5rem 2rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 1.2s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .title {
+            font-size: 2rem;
+            color: #f7971e;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        input[type="text"] {
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #ffd200;
+            font-size: 1.1rem;
+            outline: none;
+            transition: border 0.2s;
+        }
+        input[type="text"]:focus {
+            border: 1.5px solid #f7971e;
+        }
+        input[type="submit"] {
+            background: linear-gradient(90deg, #f7971e 0%, #ffd200 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(247,151,30,0.08);
+        }
+        input[type="submit"]:hover {
+            background: linear-gradient(90deg, #ffd200 0%, #f7971e 100%);
+        }
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.95rem;
+            color: #888;
+        }
+    </style>
 </head>
 <body>
-    <form action="/thankyou.php" method="post">
-        <input type="text" name="secret_msg" id="secret_msg" placeholder="Whisper your secret right here!">
-        <input type="submit" value="Submit">
-    </form>
+    <div class="card">
+        <div class="title">Whisper</div>
+        <form action="/thankyou.php" method="post">
+            <input type="text" name="secret_msg" id="secret_msg" placeholder="Whisper your secret right here!" required autocomplete="off">
+            <input type="submit" value="Submit">
+        </form>
+        <div class="footer">Your secret is safe. One time only. Whisper &copy;</div>
+    </div>
 </body>
 </html>
